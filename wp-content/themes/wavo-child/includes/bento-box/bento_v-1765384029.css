@@ -1,0 +1,1106 @@
+/* ===============================
+   
+           -------------
+           | BENTO BOX | 
+           -------------
+
+=============================== */
+
+.bento-wrapper,
+.bento-wrapper * {
+  min-height: 0 !important;
+  height: auto;
+}
+
+
+.my-story-bento {
+  display: grid;
+  grid-template-columns: 418px 256px 162px 256px;
+  grid-template-rows: 308px 192px 320px;
+  gap: 20px;
+  width: max-content;
+  margin: 0 auto;
+}
+
+/* Slot 1 — 418×524px */
+.bento-slot-1 {
+  grid-column: 1 / span 1;
+  grid-row: 1 / span 2;
+}
+
+/* Slot 2 — 418×308px (418 = 418 + 0) */
+.bento-slot-2 {
+  grid-column: 2 / span 2;
+  grid-row: 1 / span 1;
+}
+
+/* Slot 3 — 256×308px */
+.bento-slot-3 {
+  grid-column: 4 / span 1;
+  grid-row: 1 / span 1;
+}
+
+/* Slot 4 — 256×192px */
+.bento-slot-4 {
+  grid-column: 2 / span 1;
+  grid-row: 2 / span 1;
+}
+
+/* Slot 5 — 418×192px (418 = 162 + 256) */
+.bento-slot-5 {
+  grid-column: 3 / span 2;
+  grid-row: 2 / span 1;
+}
+
+/* Slot 6 — 418×320px */
+.bento-slot-6 {
+  grid-column: 1 / span 1;
+  grid-row: 3 / span 1;
+}
+
+/* Slot 7 — 699×320px (699 = 256 + 162 + 256 + 25?) */
+.bento-slot-7 {
+  grid-column: 2 / span 3;
+  grid-row: 3 / span 1;
+}
+
+
+
+/* MOBILE (stack, same heights) */
+
+@media (max-width: 1024px) {
+  .my-story-bento {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+  }
+
+  .bento-slot-1 { height: 524px; }
+  .bento-slot-2 { height: 308px; }
+  .bento-slot-3 { height: 308px; }
+  .bento-slot-4 { height: 192px; }
+  .bento-slot-5 { height: 192px; }
+  .bento-slot-6 { height: 320px; }
+  .bento-slot-7 { height: 320px; }
+}
+
+/* General slot styling (all slots) */
+
+.my-story-bento {
+  gap: 24px !important; /* separación entre slots */
+}
+
+.bento-slot {
+  background: #000;              /* fondo negro */
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  padding: 24px;                 /* padding interno */
+  box-sizing: border-box;        /* evita que el padding altere las medidas */
+  border-radius: 0px;           /* opcional: redondeo igual que en tus layouts */
+  /* Hint de performance para todos los slots */
+  content-visibility: auto;
+  contain-intrinsic-size: 500px; /* altura aproximada media de un slot */
+}
+
+/* ===============================
+   
+           ----------
+           | SLOT 1 | 
+           ----------
+
+=============================== */
+
+.slot1-content {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Carousel */
+
+.slot1-carousel {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  overflow: hidden;
+
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-sizing: border-box;
+}
+
+/* Gradients */
+.slot1-carousel::before,
+.slot1-carousel::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 100px;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.slot1-carousel::before {
+  top: 0;
+  background: linear-gradient(to bottom, #000 0%, rgba(0,0,0,0) 100%);
+}
+
+.slot1-carousel::after {
+  bottom: 0;
+  background: linear-gradient(to top, #000 0%, rgba(0,0,0,0) 100%);
+}
+
+
+/* Vertical line */
+.slot1-timeline-line {
+  position: absolute;
+  left: 24px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background-color: rgba(255,255,255,0.10);
+  z-index: 0;
+}
+
+/* Track */
+.slot1-carousel-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  will-change: transform; /* IMPORTANTE */
+}
+
+/* Items */
+
+.slot1-item {
+  height: 98px; /* EXACTO, como nos dijiste */
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+/* Dot */
+.slot1-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #0A0A0A;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  margin-left: -8px;
+  z-index: 3;
+}
+
+/* Card */
+.slot1-card {
+  margin-left: 16px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.04);
+  padding: 12px;
+  flex: 1;
+  transition: background 0.25s ease;
+  box-sizing: border-box;
+}
+
+.slot1-card:hover {
+  background: rgba(255,255,255,0.07);
+}
+
+/* Disable hover on clones */
+.slot1-item.clone .slot1-card:hover {
+  background: rgba(255,255,255,0.04);
+  pointer-events: none;
+}
+
+/* Textos */
+
+/* TITLE (usa tokens globales) */
+.slot1-card-title {
+  margin: 0;
+  font-family: var(--e-global-typography-a03c848-font-family), Sans-serif;
+  font-size: var(--e-global-typography-a03c848-font-size);
+  font-weight: var(--e-global-typography-a03c848-font-weight);
+  line-height: var(--e-global-typography-a03c848-line-height);
+  color: var(--e-global-color-e8943f2);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* DESCRIPTION */
+.slot1-card-description {
+  margin: 8px 0 0 0;
+  font-family: var(--e-global-typography-a03c848-font-family), Sans-serif;
+  font-size: var(--e-global-typography-a03c848-font-size);
+  font-weight: var(--e-global-typography-a03c848-font-weight);
+  line-height: var(--e-global-typography-a03c848-line-height);
+  color: var(--e-global-color-a8fc863);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* FIX para tener maximo 1 linea siempre y que no se rompa el layout */ 
+
+.slot1-card-title,
+.slot1-card-description {
+  display: -webkit-box !important;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;   /* solo 1 línea */
+  overflow: hidden !important;
+  text-overflow: ellipsis; /* añade los "..." */
+  white-space: normal !important;
+}
+
+
+/* TEXT BLOCK — igual que antes */
+.slot1-text-block {
+  margin-top: 24px;
+}
+
+.slot1-title {
+  font-family: var(--e-global-typography-5b3435e-font-family), sans-serif;
+  font-size: var(--e-global-typography-5b3435e-font-size);
+  font-weight: var(--e-global-typography-5b3435e-font-weight);
+  line-height: var(--e-global-typography-5b3435e-line-height);
+  color: var(--e-global-color-e8943f2);
+}
+
+.slot1-description {
+  margin-top: 8px;
+  margin-bottom: 0 !important;
+  font-family: var(--e-global-typography-e44051a-font-family), Sans-serif;
+  font-size: var(--e-global-typography-e44051a-font-size);
+  font-weight: var(--e-global-typography-e44051a-font-weight);
+  line-height: var(--e-global-typography-e44051a-line-height);
+  color: var(--e-global-color-a8fc863);
+}
+
+
+/* ===============================
+   
+           ----------
+           | SLOT 2 | 
+           ----------
+
+=============================== */
+
+
+/* SLOT 2 CONTAINER */
+.slot2-content {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* PATTERN (área superior) */
+.slot2-pattern {
+  flex: 1;
+  width: 100%;
+  position: relative; /* necesario para posicionar el canvas */
+  background: rgba(255, 255, 255, 0.04);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.10) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: 0 0;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-sizing: border-box;
+  pointer-events: none !important;
+  cursor: none !important;
+  z-index: 1;
+}
+
+/* CANVAS (ocupa todo el espacio del pattern) */
+#slot2-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 99 !important;
+  pointer-events: auto !important;
+  touch-action: none;
+}
+
+
+/* TEXT BLOCK - siempre abajo */
+.slot2-text-block {
+  margin-top: 24px;
+}
+
+/* TITLE */
+.slot2-title {
+  font-family: var(--e-global-typography-5b3435e-font-family), sans-serif;
+  font-size: var(--e-global-typography-5b3435e-font-size);
+  font-weight: var(--e-global-typography-5b3435e-font-weight);
+  line-height: var(--e-global-typography-5b3435e-line-height);
+  color: var(--e-global-color-e8943f2);
+}
+
+/* DESCRIPTION */
+.slot2-description {
+  margin-top: 8px;
+  margin-bottom: 0px !important;
+  font-family: var(--e-global-typography-e44051a-font-family), Sans-serif;
+  font-size: var(--e-global-typography-e44051a-font-size);
+  font-weight: var(--e-global-typography-e44051a-font-weight);
+  line-height: var(--e-global-typography-e44051a-line-height);
+  color: var(--e-global-color-a8fc863);
+}
+
+/* CLEAR BUTTON */
+.slot2-clear-btn {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  z-index: 200; /* por encima del canvas */
+
+  background: #141414;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 0;
+  padding: 4px 12px;
+  pointer-events: auto; /* super importante: clicable */
+
+  font-family: var(--e-global-typography-a03c848-font-family), Sans-serif;
+  font-size: var(--e-global-typography-a03c848-font-size);
+  font-weight: var(--e-global-typography-a03c848-font-weight);
+  line-height: var(--e-global-typography-a03c848-line-height);
+  color: var(--e-global-color-e8943f2);
+
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.slot2-clear-btn:hover {
+  background: #242424;
+}
+
+/* BRUSH */
+.slot2-brush-cursor {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0); /* aparece desde 0 */
+  z-index: 200;
+  opacity: 0;
+  transition:
+    opacity 0.15s ease,
+    transform 0.15s ease;
+}
+
+.slot2-brush-cursor.active {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.slot2-brush-cursor.down {
+  transform: translate(-50%, -50%) scale(1.25); /* 25% más grande */
+  transition: transform 0.1s ease;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  
+}
+
+
+/* ===============================
+   
+           ----------
+           | SLOT 3 | 
+           ----------
+
+=============================== */
+
+
+/* SLOT 3 CONTAINER */
+.slot3-content {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* TEXT BLOCK */
+.slot3-text-block {
+  margin-top: 24px;
+}
+
+/* TITLE */
+.slot3-title {
+  font-family: var(--e-global-typography-5b3435e-font-family), sans-serif;
+  font-size: var(--e-global-typography-5b3435e-font-size);
+  font-weight: var(--e-global-typography-5b3435e-font-weight);
+  line-height: var(--e-global-typography-5b3435e-line-height);
+  color: var(--e-global-color-e8943f2);
+}
+
+/* DESCRIPTION */
+.slot3-description {
+  margin-top: 8px;
+  margin-bottom: 0px !important;
+  font-family: var(--e-global-typography-e44051a-font-family), Sans-serif;
+  font-size: var(--e-global-typography-e44051a-font-size);
+  font-weight: var(--e-global-typography-e44051a-font-weight);
+  line-height: var(--e-global-typography-e44051a-line-height);
+  color: var(--e-global-color-a8fc863);
+}
+
+/* MOBILE */
+@media (max-width: 768px) {}
+
+
+/* TERMINAL CONTAINER */
+
+.slot3-terminal {
+  flex: 1;
+  width: 100%;
+  background: #000000;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 0px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+
+/* HEADER */
+
+.terminal-header {
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.04);
+  gap: 5px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+.terminal-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.terminal-dot.red { background-color: #EF4444; }
+.terminal-dot.yellow { background-color: #EAB308; }
+.terminal-dot.green { background-color: #22C55E; }
+
+/* SPACING BLOCKS */
+.terminal-spacing-4 { height: 4px; }
+.terminal-spacing-8 { height: 8px; }
+.terminal-spacing-12 { height: 12px; }
+
+/* TERMINAL BODY */
+.terminal-body {
+  padding: 12px;
+  font-family: "JetBrains Mono", monospace;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* TERMINAL COMMAND */
+.terminal-command {
+  font-size: 10px;
+  line-height: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  white-space: pre;
+}
+
+/* TERMINAL CHECK LINES */
+
+.terminal-check-line {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  line-height: 14px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.terminal-check-icon {
+  width: 10px;
+  height: 10px;
+  display: block;
+}
+
+/* TERMINAL SUCCESS */
+
+.terminal-success {
+  font-size: 10px;
+  line-height: 12px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.terminal-cursor {
+  display: inline-block;
+  margin-left: 2px;
+  animation: terminalBlink 1s steps(1, start) infinite;
+}
+
+@keyframes terminalBlink {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+
+/* ===============================
+   
+           ----------
+           | SLOT 4 | 
+           ----------
+
+=============================== */
+
+
+/* Contenedor del SLOT (este sí existe en tu DOM) */
+.bento-slot-4 {
+  display: flex;
+  align-items: center;     /* centra verticalmente */
+  justify-content: center; /* centra horizontalmente */
+}
+
+/* Contenedor interno de las palabras */
+#slot-middle-words {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+/* THINKER. → 25% opacity */
+.word.thinker svg path {
+  fill: #FFFFFF;
+  fill-opacity: 0.25;
+}
+
+/* DESIGNER. → 40% opacity */
+.word.designer svg path {
+  fill: #FFFFFF;
+  fill-opacity: 0.40;
+}
+
+/* BUILDER. → 60% opacity */
+.word.builder svg path {
+  fill: #FFFFFF;
+  fill-opacity: 0.60;
+}
+
+
+/* ===============================
+   
+           ----------
+           | SLOT 5 | 
+           ----------
+
+=============================== */
+
+.slot5-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* GIF debe ocupar el espacio sobrante, NO su altura natural */
+.slot5-gif-wrapper {
+  width: 100%;
+  flex: 1;
+  overflow: hidden;
+  border-radius: 0; /* ← eliminado */
+  display: flex;
+}
+
+.slot5-gif {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  border-radius: 0; 
+}
+
+/* PLAYER (2 COLUMNAS) */
+
+.slot5-player {
+  margin-top: 16px; /* separación respecto al GIF */
+  display: grid;
+  grid-template-columns: 1fr auto; /* IZQ: título + progress | DER: botón */
+  align-items: center; /* centra el botón verticalmente */
+  gap: 18px;
+}
+
+/* Columna izquierda agrupa título + progress */
+.slot5-left {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== SONG TITLE ===== */
+
+.slot5-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.slot5-title {
+  font-family: var(--e-global-typography-a03c848-font-family), Sans-serif;
+  font-size: var(--e-global-typography-a03c848-font-size);
+  font-weight: var(--e-global-typography-a03c848-font-weight);
+  line-height: var(--e-global-typography-a03c848-line-height);
+  color: var(--e-global-color-e8943f2);
+}
+
+/* PLAY BUTTON (columna derecha) */
+
+.slot5-play-btn {
+  background: white;
+  color: black;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; /* ← completamente circular */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease, opacity 0.2s ease;
+  padding: 0; /* ← importante */
+}
+
+
+.slot5-play-btn:hover {
+  /*transform: scale(1.05); */
+}
+
+.slot5-pause-icon {
+  display: none;
+  width: 12px;
+}
+
+.slot5-play-icon {
+  width: 12px;
+}
+
+.slot5-playing .slot5-play-icon {
+  display: none;
+}
+
+.slot5-playing .slot5-pause-icon {
+  display: block;
+}
+
+
+/*  PROGRESS BLOCK  */
+
+.slot5-progress-block {
+  margin-top: 4px; /* separación respecto al título */
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  align-items: center;
+}
+
+/* Input limpio sin bordes ni padding */
+.slot5-progress {
+  width: 100%;
+  appearance: none;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* Track → blanco 30% */
+.slot5-progress::-webkit-slider-runnable-track {
+  height: 3px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+}
+
+/* Parte recorrida (progress fill) → blanco 90% */
+.slot5-progress::-moz-range-progress {
+  background: rgba(255, 255, 255, 0.9);
+  height: 3px;
+  border-radius: 20px;
+}
+
+.slot5-progress::-ms-fill-lower {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+}
+
+/* Chrome no soporta nativamente el fill, lo haremos por JS si quieres */
+.slot5-progress::-webkit-slider-thumb {
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  background: #ffffff;
+  border-radius: 50%;
+  margin-top: -4px;
+  transition: transform 0.15s ease;
+}
+
+.slot5-progress::-webkit-slider-thumb:hover {
+  transform: scale(1.25);
+}
+
+/* Track visible (blanco 30%) */
+.slot5-progress::-webkit-slider-runnable-track {
+  height: 3px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+}
+
+/* Firefox track */
+.slot5-progress::-moz-range-track {
+  height: 3px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+}
+
+/* Creamos un pseudo-elemento para el fill */
+.slot5-progress {
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(255, 255, 255, 0.9) var(--slot5-progress-fill, 0%),
+    rgba(255, 255, 255, 0.3) var(--slot5-progress-fill, 0%),
+    rgba(255, 255, 255, 0.3) 100%
+  );
+  height: 3px;
+  border-radius: 20px;
+}
+
+.slot5-current-time {
+  font-family: var(--e-global-typography-5e72f88-font-family), Sans-serif;
+  font-size: var(--e-global-typography-5e72f88-font-size);
+  font-weight: var(--e-global-typography-5e72f88-font-weight);
+  line-height: var(--e-global-typography-5e72f88-line-height);
+  color: var(--e-global-color-a8fc863);
+  min-width: 32px;
+  text-align: right;
+}
+
+
+/* ===============================
+   
+           ----------
+           | SLOT 6 | 
+           ----------
+
+=============================== */
+
+/* CONTENEDOR PRINCIPAL */
+.slot6-content {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* WRAPPER DE LA IMAGEN */
+.slot6-image-wrapper {
+  flex: 1;
+  width: 100%;
+  position: relative;
+  overflow: hidden;            /* evita que la imagen se salga */
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-sizing: border-box;
+  align-content: center;
+}
+
+/* IMAGEN */
+.slot6-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;           /* mantiene proporciones y llena el slot */
+  transform: scale(1);
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;      /* micro-optimización */
+}
+
+/* ZOOM PREMIUM EN HOVER */
+.slot6-image-wrapper:hover .slot6-image {
+  transform: scale(1.06);
+}
+
+/* TEXTO */
+.slot6-text-block {
+  margin-top: 24px;
+}
+
+.slot6-title {
+  font-family: var(--e-global-typography-5b3435e-font-family), sans-serif;
+  font-size: var(--e-global-typography-5b3435e-font-size);
+  font-weight: var(--e-global-typography-5b3435e-font-weight);
+  line-height: var(--e-global-typography-5b3435e-line-height);
+  color: var(--e-global-color-e8943f2);
+}
+
+.slot6-description {
+  margin-top: 8px;
+  margin-bottom: 0px !important;
+  font-family: var(--e-global-typography-e44051a-font-family), Sans-serif;
+  font-size: var(--e-global-typography-e44051a-font-size);
+  font-weight: var(--e-global-typography-e44051a-font-weight);
+  line-height: var(--e-global-typography-e44051a-line-height);
+  color: var(--e-global-color-a8fc863);
+}
+
+
+
+/* ===============================
+   
+           ----------
+           | SLOT 7 | 
+           ----------
+
+=============================== */
+
+/* SLOT 7 CONTAINER */
+.slot7-content {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* PATTERN */
+.slot7-pattern {
+  flex: 1;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.10) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: 0 0;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-sizing: border-box;
+
+  position: relative;
+  overflow: hidden;
+  cursor: none !important; /* ocultar cursor nativo solo aquí */
+}
+
+/* TEXT BLOCK – siempre abajo */
+.slot7-text-block {
+  margin-top: 24px;
+}
+
+/* TITLE */
+.slot7-title {
+  font-family: var(--e-global-typography-5b3435e-font-family), sans-serif;
+  font-size: var(--e-global-typography-5b3435e-font-size);
+  font-weight: var(--e-global-typography-5b3435e-font-weight);
+  line-height: var(--e-global-typography-5b3435e-line-height);
+  color: var(--e-global-color-e8943f2);
+}
+
+/* DESCRIPTION */
+.slot7-description {
+  margin-top: 8px;
+  margin-bottom: 0px !important;
+  font-family: var(--e-global-typography-e44051a-font-family), Sans-serif;
+  font-size: var(--e-global-typography-e44051a-font-size);
+  font-weight: var(--e-global-typography-e44051a-font-weight);
+  line-height: var(--e-global-typography-e44051a-line-height);
+  color: var(--e-global-color-a8fc863);
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+
+}
+
+/* ===============================
+   SLOT 7 — TOOLBAR
+=============================== */
+
+.slot7-toolbar {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  display: flex;
+  gap: 4px;
+
+  padding: 4px 8px;
+  background-color: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 0px;
+
+  z-index: 10;
+}
+
+/* nunca mostrar cursor nativo */
+.slot7-toolbar * {
+  cursor: none !important;
+}
+
+.slot7-toolbar button {
+  background: transparent;
+  border: none;
+  padding: 4px;
+  cursor: none !important;
+  border-radius: 0px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slot7-toolbar button:hover {
+  background-color: rgba(255,255,255,0.07);
+}
+
+.slot7-toolbar img {
+  width: 16px;
+  height: 16px;
+  transition: opacity 0.25s ease;
+}
+
+.slot7-toolbar.disabled img {
+  opacity: 0.4;  
+}
+
+.slot7-toolbar:not(.disabled) img {
+  opacity: 1;   
+}
+
+
+/* ===============================
+   SHAPES (SVG INLINE)
+=============================== */
+
+.slot7-shape-layer {
+  position: absolute;
+  inset: 0;
+}
+
+.slot7-shape {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  transform: scale(0);                 /* estado inicial */
+  transition: transform 0.3s cubic-bezier(0.20, 0.80, 0.25, 1); /* Apple-like */
+}
+
+.slot7-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.slot7-svg path {
+  fill: rgba(255,255,255,0.10);
+  stroke: rgba(255,255,255,1);
+  stroke-width: 0.2; /* Grosor perfecto (viewBox 16 → 80px) */
+}
+
+/* ===============================
+   SLOT 7 — SMOOTH CUSTOM CURSOR (GUEST)
+=============================== */
+
+.slot7-fake-cursor {
+  width: 64px;
+  height: 64px;
+  position: absolute;
+  pointer-events: none;
+  background-image: url('../../../../uploads/2025/12/guest-pointer.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  transform-origin: 8px 8px;
+
+  opacity: 0;
+  transform: scale(0);
+
+  transition:
+    opacity 0.24s ease-out,
+    transform 0.24s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Wrapper que sigue al mouse */
+.slot7-cursor-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  transform: translate(0, 0);
+}
+
+/* Inner: escala + fade */
+.slot7-cursor-inner {
+  width: 64px;
+  height: 64px;
+  background-image: url('../../../../uploads/2025/12/guest-pointer.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  transform-origin: 8px 8px;
+  opacity: 0;
+  transform: scale(0);
+
+  transition:
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.28s ease-out;
+}
+
+/* Fade in al entrar */
+.slot7-pattern.cursor-active .slot7-fake-cursor {
+  opacity: 1;
+}
+
+/* ===============================
+   DIEGOVZ POINTER (NUEVO)
+=============================== */
+
+.slot7-dzg-wrapper {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  pointer-events: none;
+
+  transform: translate(0,0);
+  transition: transform 0.45s cubic-bezier(0.22,1,0.36,1);
+}
+
+.slot7-dzg-inner {
+  width: 80px;   /* controlas el tamaño aquí */
+  height: auto;  /* aspect ratio automático */
+  display: block;
+
+  transform-origin: top left;
+  transition: transform 0.25s cubic-bezier(0.22,1,0.36,1);
+}
+
+.slot7-dzg-inner.click-anim {
+  transform: scale(0.85);
+}
+
+
+
+
+
+
+
+
+
+
+
