@@ -1,0 +1,20 @@
+.elementor-5114 .elementor-element.elementor-element-5844526{--display:flex;--position:fixed;--flex-direction:row;--container-widget-width:initial;--container-widget-height:100%;--container-widget-flex-grow:1;--container-widget-align-self:stretch;--flex-wrap-mobile:wrap;--justify-content:space-between;--padding-top:24px;--padding-bottom:24px;--padding-left:40px;--padding-right:40px;top:0px;}body:not(.rtl) .elementor-5114 .elementor-element.elementor-element-5844526{left:0px;}body.rtl .elementor-5114 .elementor-element.elementor-element-5844526{right:0px;}.elementor-5114 .elementor-element.elementor-element-f1f46c6.elementor-element{--align-self:center;}.elementor-5114 .elementor-element.elementor-element-f1f46c6{text-align:start;}.elementor-5114 .elementor-element.elementor-element-f1f46c6 img{width:32px;max-width:32px;height:32px;}.elementor-5114 .elementor-element.elementor-element-92f2d9f{--display:flex;--flex-direction:column;--container-widget-width:calc( ( 1 - var( --container-widget-flex-grow ) ) * 100% );--container-widget-height:initial;--container-widget-flex-grow:0;--container-widget-align-self:initial;--flex-wrap-mobile:wrap;--justify-content:center;--align-items:flex-end;--gap:2px 2px;--row-gap:2px;--column-gap:2px;--padding-top:0px;--padding-bottom:0px;--padding-left:0px;--padding-right:0px;}.elementor-5114 .elementor-element.elementor-element-92f2d9f.e-con{--flex-grow:0;--flex-shrink:1;}.elementor-5114 .elementor-element.elementor-element-f56ed3d .elementor-heading-title{font-family:"Helvetica Now Display", Sans-serif;font-size:14px;font-weight:700;color:var( --e-global-color-e8943f2 );}.elementor-5114 .elementor-element.elementor-element-1eb34d8 .elementor-heading-title{font-family:"Space Grotesk", Sans-serif;font-size:12px;font-weight:500;color:var( --e-global-color-8ec60ef );}@media(max-width:767px){.elementor-5114 .elementor-element.elementor-element-5844526{--gap:0px 0px;--row-gap:0px;--column-gap:0px;--padding-top:16px;--padding-bottom:16px;--padding-left:16px;--padding-right:16px;}.elementor-5114 .elementor-element.elementor-element-f1f46c6 > .elementor-widget-container{margin:0px 0px 0px 0px;padding:0px 0px 0px 0px;}.elementor-5114 .elementor-element.elementor-element-f1f46c6.elementor-element{--align-self:center;}.elementor-5114 .elementor-element.elementor-element-f1f46c6 img{width:24px;max-width:24px;height:24px;}.elementor-5114 .elementor-element.elementor-element-92f2d9f{--width:50vw;--padding-top:0px;--padding-bottom:0px;--padding-left:0px;--padding-right:0px;}.elementor-5114 .elementor-element.elementor-element-f56ed3d .elementor-heading-title{font-size:12px;}.elementor-5114 .elementor-element.elementor-element-1eb34d8 .elementor-heading-title{font-size:10px;}}@media(min-width:768px){.elementor-5114 .elementor-element.elementor-element-92f2d9f{--width:50vw;}}@media(max-width:1024px) and (min-width:768px){.elementor-5114 .elementor-element.elementor-element-92f2d9f{--width:50vw;}}/* Start custom CSS for container, class: .elementor-element-5844526 */#header-diegovz {
+  background-color: transparent;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+
+  /* border siempre existe, pero transparente al inicio */
+  border-bottom: 1px solid rgba(255, 255, 255, 0);
+  backdrop-filter: blur(0);
+
+  transition:
+    border-bottom-color 0.3s ease;
+}
+
+#header-diegovz.scrolled {
+  background-color: #000000bf !important;
+  backdrop-filter: blur(30px);
+  border-bottom-color: rgba(255, 255, 255, 0.10) !important;
+}/* End custom CSS */
